@@ -49,6 +49,9 @@ def tap(x, y):
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
+        tilesclear = tilesclear+1
+        if tilesclear == 64:
+            write("You won!",font=('Arial', 30, 'normal'))
     else:
         hide[spot] = False
         hide[mark] = False
@@ -66,6 +69,7 @@ def draw():
     shape(car)
     stamp()
 
+
     for count in range(64):
         if hide[count]:
             x, y = xy(count)
@@ -82,6 +86,7 @@ def draw():
         tilmark = tiles[mark]
         write(otherind[tilmark], font=('Arial', 30, 'normal'), align = "center")
         #cambio para que las letras aparezcan.
+        write("Número de Taps: "+str(np),font=('Arial', 12, 'normal'),align = "left")
 
     update()
     ontimer(draw, 100)
