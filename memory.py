@@ -1,14 +1,3 @@
-"""Memory, puzzle game of number pairs.
-
-Exercises:
-
-1. Count and print how many taps occur.
-2. Decrease the number of tiles to a 4x4 grid.
-3. Detect when all tiles are revealed.
-4. Center single-digit tile.
-5. Use letters instead of tiles.
-"""
-
 from random import *
 from turtle import *
 
@@ -19,6 +8,8 @@ tiles = list(range(32)) * 2
 state = {'mark': None}
 hide = [True] * 64
 
+# Se crea variable para contar número de taps
+np = 0
 
 def square(x, y):
     """Draw white square with black outline at (x, y)."""
@@ -47,6 +38,8 @@ def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     spot = index(x, y)
     mark = state['mark']
+    # se define np como global para usarla en la función
+    global np
 
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
@@ -54,6 +47,10 @@ def tap(x, y):
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+    # contador de taps
+    np+=1
+    # despliega num taps en terminal
+    print("Number of taps: "+str(np))
 
 
 def draw():
